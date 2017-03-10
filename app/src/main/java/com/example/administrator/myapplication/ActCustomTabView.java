@@ -1,9 +1,8 @@
-package com.nineton.materialtabview;
+package com.example.administrator.myapplication;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,26 +10,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.nineton.materialtabview.CustomTabViewPagerAdapter;
+import com.nineton.materialtabview.FragTabViewTest;
 
 /**
  * Created by Administrator on 2017/3/9.
@@ -64,7 +57,7 @@ public class ActCustomTabView extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.TRANSPARENT);
         }*/
-        setContentView(R.layout.material_custom_tab_layout);
+        setContentView(com.nineton.materialtabview.R.layout.material_custom_tab_layout);
         initView();
         initData();
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -87,14 +80,14 @@ public class ActCustomTabView extends AppCompatActivity {
     }
 
     private void initView() {
-        appbarLayout = (AppBarLayout) findViewById(R.id.layout_appbar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        image = (ImageView) findViewById(R.id.image);
-        mask_view =findViewById(R.id.mask_view);
-        iconImage = (ImageView) findViewById(R.id.iconImage);
-        viewpager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.ctb);
+        appbarLayout = (AppBarLayout) findViewById(com.nineton.materialtabview.R.id.layout_appbar);
+        toolbar = (Toolbar) findViewById(com.nineton.materialtabview.R.id.toolbar);
+        image = (ImageView) findViewById(com.nineton.materialtabview.R.id.image);
+        mask_view =findViewById(com.nineton.materialtabview.R.id.mask_view);
+        iconImage = (ImageView) findViewById(com.nineton.materialtabview.R.id.iconImage);
+        viewpager = (ViewPager) findViewById(com.nineton.materialtabview.R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(com.nineton.materialtabview.R.id.tabLayout);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(com.nineton.materialtabview.R.id.ctb);
 //        AppBarLayout.LayoutParams lp= (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
 ////        AppBarLayout.LayoutParams lp = new AppBarLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
 //        lp.height=800;
@@ -123,7 +116,7 @@ public class ActCustomTabView extends AppCompatActivity {
         });
     }
     private void iconInAnim(final View v, Animation anim){
-        Animation  anim1 = AnimationUtils.loadAnimation(this,R.anim.anim_icon_in);
+        Animation  anim1 = AnimationUtils.loadAnimation(this, com.nineton.materialtabview.R.anim.anim_icon_in);
 //        v.setAnimation(anim);
         anim1.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -134,7 +127,7 @@ public class ActCustomTabView extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 Log.d(TAG,"返回动画");
-                Animation  anim2 = AnimationUtils.loadAnimation(ActCustomTabView.this,R.anim.anim_icon_out);
+                Animation  anim2 = AnimationUtils.loadAnimation(ActCustomTabView.this, com.nineton.materialtabview.R.anim.anim_icon_out);
                 Animator animator = ViewAnimationUtils.createCircularReveal(
                         mask_view,
                         mask_view.getWidth()/2,
@@ -206,7 +199,7 @@ public class ActCustomTabView extends AppCompatActivity {
         viewPagerAdapter.addFragment(new FragTabViewTest(), "TabThree");
         viewpager.setAdapter(viewPagerAdapter);//设置适配器
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(com.nineton.materialtabview.R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("TabOne"));//给TabLayout添加Tab
         tabLayout.addTab(tabLayout.newTab().setText("TabTwo"));
         tabLayout.addTab(tabLayout.newTab().setText("TabThree"));

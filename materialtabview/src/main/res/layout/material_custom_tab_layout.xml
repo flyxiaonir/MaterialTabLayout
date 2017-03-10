@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ActMaterialTabViewTest">
+    tools:context="com.example.administrator.myapplication.ActMaterialTabViewTest">
     <!-- android:fitsSystemWindow = "true" 表示整个布局展示是整个屏幕出去状态栏,标题栏和导航栏剩下的区域-->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/layout_appbar"

@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.nineton.materialtabview.ActMaterialTabViewTest"
+            android:name=".ActMaterialTabViewTest"
 
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -20,7 +20,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name="com.nineton.materialtabview.ActCustomTabView"
+            android:name=".ActCustomTabView"
 
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
