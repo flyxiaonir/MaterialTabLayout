@@ -3,6 +3,7 @@ package com.example.administrator.myapplication;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -116,6 +117,7 @@ public class ActCustomTabView extends AppCompatActivity {
         });
     }
     private void iconInAnim(final View v, Animation anim){
+
         Animation  anim1 = AnimationUtils.loadAnimation(this, com.nineton.materialtabview.R.anim.anim_icon_in);
 //        v.setAnimation(anim);
         anim1.setAnimationListener(new Animation.AnimationListener() {
@@ -128,49 +130,52 @@ public class ActCustomTabView extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 Log.d(TAG,"返回动画");
                 Animation  anim2 = AnimationUtils.loadAnimation(ActCustomTabView.this, com.nineton.materialtabview.R.anim.anim_icon_out);
-                Animator animator = ViewAnimationUtils.createCircularReveal(
-                        mask_view,
-                        mask_view.getWidth()/2,
-                        mask_view.getHeight()/2,
-                        0,
-                        mask_view.getWidth()/2);
-                mask_view.setBackgroundColor(Color.BLUE);
-                mask_view.setAlpha(1.0f);
-                animator.setInterpolator(new AccelerateInterpolator());
-                animator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Animator animator = ViewAnimationUtils.createCircularReveal(
+                            mask_view,
+                            mask_view.getWidth()/2,
+                            mask_view.getHeight()/2,
+                            0,
+                            mask_view.getWidth()/2);
+                    mask_view.setBackgroundColor(Color.BLUE);
+                    mask_view.setAlpha(1.0f);
+                    animator.setInterpolator(new AccelerateInterpolator());
+                    animator.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        Log.d(TAG,"animator返回动画");
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            Log.d(TAG,"animator返回动画");
 //                        mask_view.setBackgroundColor(Color.GREEN);
-                        ObjectAnimator anpim4 =ObjectAnimator.ofFloat(mask_view,"alpha",0.9f,0.4f);
-                        anpim4.setDuration(300);
-                        anpim4.setStartDelay(100);
-                        anpim4.setInterpolator(new AccelerateInterpolator());
-                        anpim4.start();
+                            ObjectAnimator anpim4 =ObjectAnimator.ofFloat(mask_view,"alpha",0.9f,0.4f);
+                            anpim4.setDuration(300);
+                            anpim4.setStartDelay(100);
+                            anpim4.setInterpolator(new AccelerateInterpolator());
+                            anpim4.start();
 //                        Animation  anim3 = AnimationUtils.loadAnimation(ActCustomTabView.this,R.anim.mask_alpha_anim);
 //                        anim3.setFillAfter(true);
 //                        mask_view.startAnimation(anim3);
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
 
-                    }
-                });
-                animator.setDuration(400);
-                animator.start();
+                        }
+                    });
+                    animator.setDuration(400);
+                    animator.start();
 
-                v.startAnimation(anim2);
+                    v.startAnimation(anim2);
+                }
+
             }
 
             @Override

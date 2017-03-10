@@ -13,13 +13,19 @@ import java.util.List;
  */
 
 public class CustomTabViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> mFragments = new ArrayList<>();//Fragment集合
-    private final List<String> mFragmentsTitles = new ArrayList<>();//title集合
+    private  List<Fragment> mFragments ;//Fragment集合
+    private  List<String> mFragmentsTitles ;//title集合
 
+    public CustomTabViewPagerAdapter(FragmentManager fm,List<Fragment>fragments,List<String> tabsTitle) {
+        super(fm);
+        mFragments = fragments;
+        mFragmentsTitles=tabsTitle;
+    }
     public CustomTabViewPagerAdapter(FragmentManager fm) {
         super(fm);
+        mFragments = new ArrayList<>();
+        mFragmentsTitles=new ArrayList<>();
     }
-
     public void addFragment(Fragment fragment, String fragmentTitle) {
 
         mFragments.add(fragment);

@@ -7,20 +7,66 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.nineton.materialtabview.CustomTabView;
+import com.nineton.materialtabview.CustomTabViewPagerAdapter;
+import com.nineton.materialtabview.FragTabViewTest;
+import com.nineton.materialtabview.TabDataHolder;
 
 public class MainActivity extends AppCompatActivity {
+    private MyHolder myHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new MyView(this));
+        setContentView(R.layout.content_main);
+        final CustomTabView tabView = (CustomTabView) findViewById(R.id.main_customTabView);
+        myHolder = new MyHolder();
+        tabView.setTopWindowCollpaseMinimumHeight(200);
+        tabView.setTopWindowHeight(400);
+        tabView.setData(myHolder);
+
+        tabView.setOnTabStatusChangeListener(new CustomTabView.OnTabStatusChangeListener<MyHolder>() {
+            @Override
+            public void onPageScrolled(MyHolder holder, int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(MyHolder holder, int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(MyHolder holder, int state) {
+
+            }
+
+            @Override
+            public void onExpanded(MyHolder holder, int totalRange, int verticalOffset) {
+                holder.iconImage.setAlpha(1.0f);
+            }
+
+            @Override
+            public void onCollapsed(MyHolder holder, int totalRange, int verticalOffset) {
+                holder.iconImage.setAlpha(0f);
+            }
+
+            @Override
+            public void onInternediate(MyHolder holder, int totalRange, int verticalOffset) {
+                float alpha = 1 - Math.abs((float) verticalOffset) / Math.abs(totalRange);
+                Log.d("lf", "alpha=" + alpha);
+                holder.iconImage.setAlpha(alpha);
+            }
+        });
 //        setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -35,27 +81,35 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    private class MyHolder extends TabDataHolder {
+        private ImageView image, iconImage;
+        private View mTopMask;
+        private View mTopRootView;
+
+        @Override
+        public View onCreateTopView(LayoutInflater inflater, ViewGroup container) {
+            mTopRootView = inflater.inflate(R.layout.body_top_layout, container);
+            image = (ImageView) mTopRootView.findViewById(R.id.image);
+            iconImage = (ImageView) mTopRootView.findViewById(R.id.iconImage);
+            mTopMask = mTopRootView.findViewById(R.id.mask_view);
+            return mTopRootView;
+        }
+
+        @Override
+        public void onBindingPagerData(TabLayout tabLayout, ViewPager viewPager) {
+            CustomTabViewPagerAdapter viewPagerAdapter = new CustomTabViewPagerAdapter(getSupportFragmentManager());
+            viewPagerAdapter.addFragment(new FragTabViewTest(), "TabOne");//添加Fragment
+            viewPagerAdapter.addFragment(new FragTabViewTest(), "TabTwo");
+            viewPagerAdapter.addFragment(new FragTabViewTest(), "TabThree");
+            viewPager.setAdapter(viewPagerAdapter);//设置适配器
+
+            tabLayout.addTab(tabLayout.newTab().setText("TabOne"));//给TabLayout添加Tab
+            tabLayout.addTab(tabLayout.newTab().setText("TabTwo"));
+            tabLayout.addTab(tabLayout.newTab().setText("TabThree"));
+            tabLayout.setupWithViewPager(viewPager);//给TabLayout设置关
+        }
+    }
+
     class MyView extends View {
         final String DRAW_STR = "自强不息";
         // 画笔
@@ -100,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 //            canvas.drawTextOnPath(DRAW_STR, paths[0], -8, 20, paint);
             canvas.save();
             // 画布下移120
-            canvas.translate(getWidth()/2, getHeight()/2);
+            canvas.translate(getWidth() / 2, getHeight() / 2);
             paint.setTextAlign(Paint.Align.CENTER);
 //            canvas.rotate(45 * Math.PI/180);
             // 绘制路径
@@ -125,4 +179,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 }
