@@ -61,21 +61,21 @@ public class CustomTabView extends FrameLayout {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (mListener != null) {
-                    mListener.onPageScrolled(mDataHolder,position, positionOffset, positionOffsetPixels);
+                    mListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (mListener != null) {
-                    mListener.onPageSelected(mDataHolder,position);
+                    mListener.onPageSelected(position);
                 }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 if (mListener != null) {
-                    mListener.onPageScrollStateChanged(mDataHolder,state);
+                    mListener.onPageScrollStateChanged(state);
                 }
             }
         });
@@ -86,10 +86,10 @@ public class CustomTabView extends FrameLayout {
                 if (verticalOffset == 0) {
                     if (mCurrentState != FLAG_EXPANDED) {
                         mCurrentState = FLAG_EXPANDED;//修改状态标记为展开
-//                        Log.d(TAG, "控件状态为展开状态");
+
                         if (mListener != null) {
 
-                            mListener.onExpanded(mDataHolder,appBarLayout.getTotalScrollRange(), verticalOffset);
+                            mListener.onExpanded(appBarLayout.getTotalScrollRange(), verticalOffset);
                         }
                     }
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
@@ -99,13 +99,13 @@ public class CustomTabView extends FrameLayout {
                         mCurrentState = FLAG_COLLAPSED;//修改状态标记为折叠
 //                        Log.d(TAG, "控件状态为收缩状态");
                         if (mListener != null) {
-                            mListener.onCollapsed(mDataHolder,appBarLayout.getTotalScrollRange(), verticalOffset);
+                            mListener.onCollapsed(appBarLayout.getTotalScrollRange(), verticalOffset);
                         }
                     }
                 } else {
 //                    Log.d(TAG, "控件状态为中间状态");
                     if (mListener != null) {
-                        mListener.onInternediate(mDataHolder,appBarLayout.getTotalScrollRange(), verticalOffset);
+                        mListener.onInternediate(appBarLayout.getTotalScrollRange(), verticalOffset);
                     }
                     mCurrentState = FLAG_INTERNEDIATE;//修改状态标记为中间
 
@@ -113,6 +113,7 @@ public class CustomTabView extends FrameLayout {
             }
         });
     }
+
     public void setData(@NonNull TabDataHolder dataHolder){
        //初始化顶部frame的高度和折叠剩余高度并添加顶部view
         setTopWindowHeight(mTopWindowHeight);
@@ -134,6 +135,27 @@ public class CustomTabView extends FrameLayout {
 //
 //        }
     }
+
+    public TabDataHolder getDataHolder() {
+        return mDataHolder;
+    }
+
+    public Toolbar getToolbar() {
+        return mToolbar;
+    }
+
+    public AppBarLayout getAppbarLayout() {
+        return mAppbarLayout;
+    }
+
+    public ViewPager getViewPager() {
+        return mViewPager;
+    }
+
+    public TabLayout getTabLayout() {
+        return mTabLayout;
+    }
+
     /**设置顶部窗口折叠最小高度
      * @param height
      */
@@ -196,12 +218,12 @@ public class CustomTabView extends FrameLayout {
     public void setOnTabStatusChangeListener(OnTabStatusChangeListener listener){
         mListener=listener;
     }
-    public  interface OnTabStatusChangeListener<Holder extends TabDataHolder> {
-        void onPageScrolled(Holder holder, int position, float positionOffset, int positionOffsetPixels);
+    public  interface OnTabStatusChangeListener {
+        void onPageScrolled( int position, float positionOffset, int positionOffsetPixels);
 
-        void onPageSelected(Holder holder, int position);
+        void onPageSelected( int position);
 
-        void onPageScrollStateChanged(Holder holder, int state);
+        void onPageScrollStateChanged( int state);
 
         /**
          * 顶部窗口展开状态
@@ -209,7 +231,7 @@ public class CustomTabView extends FrameLayout {
          * @param totalRange     顶部窗口可以滑动总距离
          * @param verticalOffset 当前滑动位置（注意负数）
          */
-        void onExpanded(Holder holder, int totalRange, int verticalOffset);
+        void onExpanded( int totalRange, int verticalOffset);
 
         /**
          * 顶部窗口收缩状态
@@ -217,7 +239,7 @@ public class CustomTabView extends FrameLayout {
          * @param totalRange     顶部窗口可以滑动总距离
          * @param verticalOffset 当前滑动位置（注意负数）
          */
-        void onCollapsed(Holder holder, int totalRange, int verticalOffset);
+        void onCollapsed( int totalRange, int verticalOffset);
 
         /**
          * 顶部窗口中间状态
@@ -225,7 +247,7 @@ public class CustomTabView extends FrameLayout {
          * @param totalRange     顶部窗口可以滑动总距离
          * @param verticalOffset 当前滑动位置（注意负数）
          */
-        void onInternediate(Holder holder, int totalRange, int verticalOffset);
+        void onInternediate( int totalRange, int verticalOffset);
 
     }
 }

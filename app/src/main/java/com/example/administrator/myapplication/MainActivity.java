@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         tabView.setTopWindowHeight(400);
         tabView.setData(myHolder);
 
-        tabView.setOnTabStatusChangeListener(new CustomTabView.OnTabStatusChangeListener<MyHolder>() {
+       /* tabView.setOnTabStatusChangeListener(new CustomTabView.OnTabStatusChangeListener() {
             @Override
             public void onPageScrolled(MyHolder holder, int position, float positionOffset, int positionOffsetPixels) {
 
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("lf", "alpha=" + alpha);
                 holder.iconImage.setAlpha(alpha);
             }
-        });
+        });*/
 //        setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);

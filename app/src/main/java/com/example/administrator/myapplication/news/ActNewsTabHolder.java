@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.nineton.materialtabview.CustomTabViewPagerAdapter;
 import com.nineton.materialtabview.TabDataHolder;
-
+import com.example.administrator.myapplication.R;
 import java.util.List;
 
 /**
@@ -31,11 +31,12 @@ public class ActNewsTabHolder extends TabDataHolder {
 
     @Override
     public View onCreateTopView(LayoutInflater inflater, ViewGroup container) {
-        inflater.inflate(com.nineton.materialtabview.R.layout.body_top_layout,container);
-        mTopRootView = inflater.inflate(com.nineton.materialtabview.R.layout.body_top_layout, container);
-        mBg = (ImageView) mTopRootView.findViewById(com.nineton.materialtabview.R.id.image);
-        mIconImage = (ImageView) mTopRootView.findViewById(com.nineton.materialtabview.R.id.iconImage);
-        mTopMask = mTopRootView.findViewById(com.nineton.materialtabview.R.id.mask_view);
+        inflater.inflate(R.layout.body_top_layout,container);
+        mTopRootView =container;
+        mBg = (ImageView) mTopRootView.findViewById(R.id.bg_image);
+        mIconImage = (ImageView) mTopRootView.findViewById(R.id.iconImage);
+//        mIconImage.setImageResource(R.drawable.ic_tiyu);
+        mTopMask = mTopRootView.findViewById(R.id.mask_view);
         return mTopRootView;
     }
 
@@ -44,7 +45,7 @@ public class ActNewsTabHolder extends TabDataHolder {
         List<RespNewsCate.DataBean> typeList =mTypeData.getData();
         CustomTabViewPagerAdapter viewPagerAdapter = new CustomTabViewPagerAdapter(mFm);
         for (int i = 0; i <typeList.size() ; i++) {
-            FragNewArticle fragment = new FragNewArticle();
+            FragNewsHot fragment = new FragNewsHot();
             Bundle bundle = new Bundle();
             bundle.putString("title",typeList.get(i).getName());
             bundle.putInt("id",typeList.get(i).getId());

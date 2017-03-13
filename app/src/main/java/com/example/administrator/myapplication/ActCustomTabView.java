@@ -118,7 +118,7 @@ public class ActCustomTabView extends AppCompatActivity {
     }
     private void iconInAnim(final View v, Animation anim){
 
-        Animation  anim1 = AnimationUtils.loadAnimation(this, com.nineton.materialtabview.R.anim.anim_icon_in);
+        Animation  anim1 = AnimationUtils.loadAnimation(this, com.nineton.materialtabview.R.anim.anim_icon_out);
 //        v.setAnimation(anim);
         anim1.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -129,7 +129,7 @@ public class ActCustomTabView extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 Log.d(TAG,"返回动画");
-                Animation  anim2 = AnimationUtils.loadAnimation(ActCustomTabView.this, com.nineton.materialtabview.R.anim.anim_icon_out);
+                Animation  anim2 = AnimationUtils.loadAnimation(ActCustomTabView.this, com.nineton.materialtabview.R.anim.anim_icon_in);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Animator animator = ViewAnimationUtils.createCircularReveal(
                             mask_view,

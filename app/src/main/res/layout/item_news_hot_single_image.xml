@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="100dp"
+android:orientation="horizontal"
+android:padding="8dp">
+
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="2.1"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="16dp"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/item_news_hot_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/news_hot_item_title"
+        android:textSize="17sp"
+        tools:text="titlegfdagdsgfasdfgdsfhsfghdfghsdfghdsfghf" />
+
+    <TextView
+        android:id="@+id/item_news_hot_count"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:textSize="10sp"
+        tools:text="100005人浏览" />
+
+
+</LinearLayout>
+
+<ImageView
+    android:id="@+id/item_news_hot_image"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:scaleType="centerCrop"
+    tools:src="@drawable/test_item_image" />
+</LinearLayout>
